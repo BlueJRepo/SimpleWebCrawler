@@ -77,10 +77,10 @@ public class MyCrawlerServiceTest {
 	public void testRetrevieTitleUsingJSOUP() throws IOException {
 		Document doc = Jsoup.connect("https://www.facebook.com/netregistry").get();
 		String title = null;
-		if(!doc.getElementsByTag("title").isEmpty()) {
-        	title = doc.getElementsByTag("title").get(0).text();
-        	_log.info("title =" + title);
-        }
+		if(!doc.getElementsByTag("title").isEmpty()){
+			title = doc.getElementsByTag("title").get(0).text();
+			_log.info("title =" + title);
+		}
 		assertEquals(title,"Netregistry - Home | Facebook");
 	}
 	
