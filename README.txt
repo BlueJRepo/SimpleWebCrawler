@@ -6,7 +6,8 @@
 *	%>curl http://localhost:8081/api/v1/web-crawler?url=[SOME_INPUT_URL]
 *
 *It generally takes upto 3 minutes for a response.
-*It support more than one concurrent http requests hitting the server.
+*It supports more than one concurrent http requests hitting the server.
+*Install JDK1.8/Maven and place them in the PATH. 
 */
 
 1. 
