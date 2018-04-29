@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.ListIterator;
+import java.util.concurrent.CompletableFuture;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -57,6 +58,7 @@ public class MyCrawlerServiceTest {
 	public void test_crawlMe_should_return_valid_result() {
 		String url = "https://www.netregistry.com.au/domain-names/domain-names-for-sale";
 		Node result = new Node();
+		
 		try {
 			result = myCrawlerService.crawlMe(url); //craw4j getOutGoingUrls
 		} catch (Exception e) {
@@ -73,10 +75,10 @@ public class MyCrawlerServiceTest {
 			 e.printStackTrace();
 		 }
 		_log.info("===========================================================================");
-		Node node = new Node();
-		node.setUrl("http://www.netfleet.com.au/buy-domains");
+		Node cnode = new Node();
+		cnode.setUrl("http://www.netfleet.com.au/buy-domains");
 		
-		assertTrue(result.getNodes().contains(node));
+		assertTrue(result.getNodes().contains(cnode));
 	}
 	
 	

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import au.com.bluej.domain.Node;
 import au.com.bluej.exception.MyWebCrawlerException;
 import au.com.bluej.service.MyCrawlerService;
@@ -29,7 +30,8 @@ public class WebCrawlController {
 	public ResponseEntity crawlMe(@RequestParam("url") String url){
 		Node node = null;
 		try {
-			node = myCrawlerService.crawlMe(url);			
+			node = myCrawlerService.crawlMe(url);	
+			return new ResponseEntity<Node>(node, HttpStatus.OK);
 		}catch(MyWebCrawlerException me) {
 			_log.debug("There is an exception in MyCrawlerService " + me.getMessage());
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(me.getMessage());
@@ -38,7 +40,7 @@ public class WebCrawlController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 	
-		return new ResponseEntity<Node>(node, HttpStatus.OK);
+		
 	}
 	
 }

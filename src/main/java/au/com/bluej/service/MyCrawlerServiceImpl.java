@@ -1,7 +1,6 @@
 package au.com.bluej.service;
 
-
-import java.util.Hashtable;
+import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
@@ -14,7 +13,6 @@ import edu.uci.ics.crawler4j.crawler.CrawlController;
 import edu.uci.ics.crawler4j.fetcher.PageFetcher;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
-import edu.uci.ics.crawler4j.url.URLCanonicalizer;
 
 @Service("myCrawlerService")
 public class MyCrawlerServiceImpl implements MyCrawlerService{
@@ -37,7 +35,13 @@ public class MyCrawlerServiceImpl implements MyCrawlerService{
 		url = url.replaceAll("\\/$","");
 		//Use crawler4j lib for multi thread support in scrapping web pages.
 		CrawlConfig config = new CrawlConfig();		
-		config.setCrawlStorageFolder(crawlStorageFolder);
+		Date date = new Date();
+		
+		//time in milliseconds so config object is different for every http request calling crawlMe
+		//which starts another set of "numberOfCrawlers" crawlers.
+		//This will address concurrent http user requests hitting the server.
+		String time = String.valueOf(date.getTime()); 
+		config.setCrawlStorageFolder(crawlStorageFolder.concat("/").concat(time));
 		
 		/**
 		 * Politeness delay in milliseconds (delay between sending two requests to the same host).
@@ -71,13 +75,13 @@ public class MyCrawlerServiceImpl implements MyCrawlerService{
 		
 		//Blocking methods execute synchronously and non-blocking methods execute asynchronously.
 		//startNonBlocking requires waitUntilFinish
+		
 		//controller.startNonBlocking(factory, numberOfCrawlers);
 		//controller.waitUntilFinish();
 		
-   	 	_log.info("==============" + numberOfCrawlers + " Crawling Threads =============="); 
-
 		controller.start(factory, numberOfCrawlers);
 		
+   	 	_log.info("==============" + numberOfCrawlers + " Crawling Threads =============="); 		
 		/**
     	 _log.info("==========START WEB CRAWLER RESULT ================================================================="); 
     	 try{

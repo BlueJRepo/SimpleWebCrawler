@@ -20,6 +20,8 @@ public class MyCrawler extends WebCrawler{
 
 	private Map<String, Node> crawlingCollection;
 
+	private  Node currentNode;
+	
 	public MyCrawler(Map<String, Node> crawlingCollection) {
 		this.crawlingCollection = crawlingCollection;
 	}
@@ -41,20 +43,33 @@ public class MyCrawler extends WebCrawler{
              }
              
              _log.info("crawling: " +url);
+             
              //extract custom data             
-             Node currentNode = crawlingCollection.get(url);   
-             //boolean newNode = false;
-             if(currentNode == null) {   
-            	 //newNode = true;
+             currentNode = crawlingCollection.get(url);   
+             if(currentNode == null) {               	
             	 currentNode = new Node();
-            	 currentNode.setUrl(url); 
-            	 //link myNode to a referrer node if there is one existing.            	             	
+            	 currentNode.setUrl(url);           	             	
              }             
              currentNode.setTitle(title);
              Set<WebURL> links = htmlParseData.getOutgoingUrls();
              if(!links.isEmpty() && currentNode.getNodes().isEmpty()) {
 
-	             //Update the found node			            		             
+            	 //Update the found node 
+            	 
+            	 //java 8
+            	 links.stream()
+            	 		.filter(link -> URLValidator.isWorthCrawlingURL(link.getURL().replaceAll("\\/$","")) && shouldVisit(page, link))
+            	 		.filter(link ->  crawlingCollection.get(link.getURL().replaceAll("\\/$","")) == null)
+            	 		.forEach(link -> {
+            	 			Node myNode = new Node();
+            	 			String newUrl = link.getURL().replaceAll("\\/$","");
+            	 			myNode.setUrl(newUrl);
+            	 			crawlingCollection.put(newUrl, myNode);
+            	 			currentNode.getNodes().add(myNode);
+            	 		});
+            	 
+            	 /**
+            	  *	             			            		            
 	             for(WebURL link : links){
 	            	 String newUrl = link.getURL();
 	            	 newUrl = newUrl.replaceAll("\\/$",""); 
@@ -67,7 +82,9 @@ public class MyCrawler extends WebCrawler{
 	            			 currentNode.getNodes().add(myNode);
 	            		 }
 	            	 }
-	             }            	 	            
+	             }	             
+	             **/
+            	 
              }
 		 	 
              crawlingCollection.put(url, currentNode);                        
