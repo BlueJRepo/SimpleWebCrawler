@@ -15,11 +15,11 @@
 	
 	
 2.
-	The crawling process behind is purely based on Crawler4j, it requires initial parameters which defines 
-	the number of crawling threads, and max page depth.
+	The crawling process behind is purely based on Crawler4j, it requires initial parameters which 
+	defines the number of crawling threads, and max page depth of crawling.
 	
 	numberOfCrawlers=5	 
-	maxDepthOfCrawling=1 (increase this parameter will experience the exponential growth in memory usage)
+	maxDepthOfCrawling=1 (increase this parameter will increase memory usage)
 	
 	These parameters are listed in the application.properties file.
 	
@@ -43,8 +43,8 @@
 		   	 	Use "Task Manager" on window to end task with the found PID 
 		   	 	or use "kill -9 [pid]" on linux.
 		
-		b. Enable endpoints.shutdown.enabled=true in application.properties so springboot application 
-		can be shutdown by sending shutdown request. 
+		b. Enable endpoints.shutdown.enabled=true in application.properties so 
+		springboot application can be shutdown by sending shutdown request. 
 5.  
 	Crawling service can also be invoked without starting up the springboot service 
     		
