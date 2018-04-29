@@ -73,19 +73,22 @@ public class MyCrawlerServiceTest {
 			 e.printStackTrace();
 		 }
 		_log.info("===========================================================================");
+		Node node = new Node();
+		node.setUrl("http://www.netfleet.com.au/buy-domains");
 		
-		assertTrue(result.getNodes().size() > 0);
+		assertTrue(result.getNodes().contains(node));
 	}
 	
 	
 	@Test
-	public void testJSOUP() throws IOException {
+	public void testRetrevieTitleUsingJSOUP() throws IOException {
 		Document doc = Jsoup.connect("https://www.facebook.com/netregistry").get();
-		
+		String title = null;
 		if(!doc.getElementsByTag("title").isEmpty()) {
-        	String title = doc.getElementsByTag("title").get(0).text();
+        	title = doc.getElementsByTag("title").get(0).text();
         	_log.info("title =" + title);
         }
+		assertEquals(title,"Netregistry - Home | Facebook");
 	}
 	
 	
