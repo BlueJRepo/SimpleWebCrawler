@@ -2,7 +2,11 @@
 *SIMPLE WEB CRAWLER REST SERVICE
 *Author Steven Nguyen
 *Date 30/04/2018
-*http://localhost:8081/api/v1/web-crawler?url=[SOME_INPUT_URL]
+*	
+*	%>curl http://localhost:8081/api/v1/web-crawler?url=[SOME_INPUT_URL]
+*
+*It generally takes upto 3 minutes for a response.
+*It support more than one concurrent http requests hitting the server.
 */
 
 1. 
