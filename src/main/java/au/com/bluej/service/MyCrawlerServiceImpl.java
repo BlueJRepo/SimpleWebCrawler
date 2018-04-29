@@ -69,8 +69,7 @@ public class MyCrawlerServiceImpl implements MyCrawlerService{
 		
 		Map<String, Node> crawlingCollection = new ConcurrentHashMap<String, Node>();
 		//Map<String, Node> crawlingCollection = new Hashtable<String, Node>();
-		Node node = new Node();
-		node.setUrl(url);
+		Node node = new Node(url);
 		crawlingCollection.put(url, node);
 		MyCrawlerFactory factory = new MyCrawlerFactory(crawlingCollection);
 		

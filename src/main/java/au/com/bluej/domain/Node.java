@@ -9,6 +9,10 @@ public class Node{
 	private String title;
 	private List<Node> nodes = new ArrayList<Node>();
 	
+	public Node(String url) {
+		this.url = url;
+	}
+	
 	public String getUrl() {
 		return url;
 	}

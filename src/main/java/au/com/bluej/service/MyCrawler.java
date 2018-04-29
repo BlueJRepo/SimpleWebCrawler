@@ -45,20 +45,16 @@ public class MyCrawler extends WebCrawler{
              
              //extract custom data             
              currentNode = crawlingCollection.get(url);   
-             if(currentNode == null) {               	
-            	 currentNode = new Node();
-            	 currentNode.setUrl(url);           	             	
-             }             
+             if(currentNode == null) currentNode = new Node(url);               	            	             	      	             	             
              currentNode.setTitle(title);
              Set<WebURL> links = htmlParseData.getOutgoingUrls();
              if(!links.isEmpty() && currentNode.getNodes().isEmpty()) {
             	 links.stream()
             	 		.filter(link -> URLValidator.isWorthCrawlingURL(link.getURL().replaceAll("\\/$","")) && shouldVisit(page, link))
             	 		.filter(link ->  crawlingCollection.get(link.getURL().replaceAll("\\/$","")) == null)
-            	 		.forEach(link -> {
-            	 			Node myNode = new Node();
+            	 		.forEach(link -> {            	 		
             	 			String newUrl = link.getURL().replaceAll("\\/$","");
-            	 			myNode.setUrl(newUrl);
+            	 			Node myNode = new Node(newUrl);         
             	 			crawlingCollection.put(newUrl, myNode);
             	 			currentNode.getNodes().add(myNode);
             	 		}

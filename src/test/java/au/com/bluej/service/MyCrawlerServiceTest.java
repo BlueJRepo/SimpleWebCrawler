@@ -48,28 +48,28 @@ public class MyCrawlerServiceTest {
 	@Test //compare jsoup result with craw4j result
 	public void test_crawlMe_should_return_valid_result() {
 		String url = "https://www.netregistry.com.au/domain-names/domain-names-for-sale";
-		Node result = new Node();
+		Node result = null;
 		
 		try {
 			result = myCrawlerService.crawlMe(url); //craw4j getOutGoingUrls
-		} catch (Exception e) {
+			
+			_log.info("===========================================================================");
+			 try{
+	         	 ObjectMapper objectMapper = new ObjectMapper();
+	         	 String json = new String(objectMapper.writeValueAsBytes(result));
+	         	_log.info(json);  
+			 }catch (JsonProcessingException e) {
+				 // TODO Auto-generated catch block
+				 _log.info(e.getMessage());
+			 }
+			_log.info("===========================================================================");
+			
+		} catch (Exception e) {			
 			_log.info(e.getMessage());
-		}
+		}	
 		
-		_log.info("===========================================================================");
-		 try{
-         	 ObjectMapper objectMapper = new ObjectMapper();
-         	 String json = new String(objectMapper.writeValueAsBytes(result));
-         	_log.info(json);  
-		 }catch (JsonProcessingException e) {
-			 // TODO Auto-generated catch block
-			 e.printStackTrace();
-		 }
-		_log.info("===========================================================================");
-		Node cnode = new Node();
-		cnode.setUrl("http://www.netfleet.com.au/buy-domains");
-		
-		assertTrue(result.getNodes().contains(cnode));
+		Node cnode = new Node("http://www.netfleet.com.au/buy-domains");		
+		assertTrue(result != null && result.getNodes().contains(cnode));
 	}
 	
 	
