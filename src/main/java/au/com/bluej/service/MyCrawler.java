@@ -1,6 +1,5 @@
 package au.com.bluej.service;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.jsoup.Jsoup;
@@ -53,10 +52,6 @@ public class MyCrawler extends WebCrawler{
              currentNode.setTitle(title);
              Set<WebURL> links = htmlParseData.getOutgoingUrls();
              if(!links.isEmpty() && currentNode.getNodes().isEmpty()) {
-
-            	 //Update the found node 
-            	 
-            	 //java 8
             	 links.stream()
             	 		.filter(link -> URLValidator.isWorthCrawlingURL(link.getURL().replaceAll("\\/$","")) && shouldVisit(page, link))
             	 		.filter(link ->  crawlingCollection.get(link.getURL().replaceAll("\\/$","")) == null)
@@ -66,25 +61,8 @@ public class MyCrawler extends WebCrawler{
             	 			myNode.setUrl(newUrl);
             	 			crawlingCollection.put(newUrl, myNode);
             	 			currentNode.getNodes().add(myNode);
-            	 		});
-            	 
-            	 /**
-            	  *	             			            		            
-	             for(WebURL link : links){
-	            	 String newUrl = link.getURL();
-	            	 newUrl = newUrl.replaceAll("\\/$",""); 
-	            	 if(URLValidator.isWorthCrawlingURL(newUrl) && shouldVisit(page, link)) { 	            		 
-	            		 Node myNode = crawlingCollection.get(newUrl); 
-	            		 if(myNode == null) {	
-	            			 myNode = new Node();
-	            			 myNode.setUrl(newUrl);	
-	            			 crawlingCollection.put(newUrl, myNode);
-	            			 currentNode.getNodes().add(myNode);
-	            		 }
-	            	 }
-	             }	             
-	             **/
-            	 
+            	 		}
+            	 );            	             	
              }
 		 	 
              crawlingCollection.put(url, currentNode);                        
