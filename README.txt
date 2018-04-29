@@ -45,7 +45,7 @@
 		b. Enable endpoints.shutdown.enabled=true in application.properties so springboot application 
 		can be shutdown by sending shutdown request. 
 5.  
-	Crawling service can also be run without starting up the springboot service 
+	Crawling service can also be invoked without starting up the springboot service 
     		
 		C:\workspace\SimpleWebCrawler>mvn clean -Dtest=MyCrawlerServiceTest#test_crawlMe_should_return_valid_result  test
 	   
