@@ -42,6 +42,7 @@ public class MyCrawlerServiceImpl implements MyCrawlerService{
 		//This will address concurrent http user requests hitting the server.
 		String time = String.valueOf(date.getTime()); 
 		config.setCrawlStorageFolder(crawlStorageFolder.concat("/").concat(time));
+		//config.setCrawlStorageFolder(crawlStorageFolder);
 		
 		/**
 		 * Politeness delay in milliseconds (delay between sending two requests to the same host).
