@@ -8,7 +8,7 @@
 	This RESTFUL service is implemented by using Java/Springboot/Crawler4j for multithreads crawler and 
 	Jsoup API for the ease of html elements access. 
     
-	The project is packaged using maven and should be decompressed before starting from commandline:
+	The project is packaged using maven and can be started from commandline:
 	
 		C:\workspace\SimpleWebCrawler>mvn spring-boot:run
 	
