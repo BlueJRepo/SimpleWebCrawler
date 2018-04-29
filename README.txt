@@ -10,7 +10,7 @@
 */
 
 1. 
-	This RESTFUL service is implemented by using Java/Springboot/Crawler4j for multithreads crawler and 
+	This RESTFUL service is implemented by using Java8/Springboot/Crawler4j for multithreads crawler and 
 	Jsoup API for the ease of html elements access. 
     
 	The project is packaged using maven and can be started from commandline:
